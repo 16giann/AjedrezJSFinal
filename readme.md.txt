@@ -1,4 +1,4 @@
-# AJEDREZ 🎯
+#AJEDREZ 
 
 Entrega N3 - Desarrollo Web y Móvil  
 Autor: Gianfranco Caleni
@@ -9,7 +9,7 @@ y gestionar movimientos sobre un tablero interactivo.
 
 ---
 
-## 📦 Tecnologías
+#Tecnologías
 
 - **Node.js** + **Express.js**
 - **MongoDB** (con Mongoose)
@@ -18,29 +18,29 @@ y gestionar movimientos sobre un tablero interactivo.
 - **PM2** (ejecución persistente en producción)
 - HTML, CSS (sin frameworks frontend)
 
-## 📝 Instalación
+#Instalación
 
-1. Clona el repositorio:
+1.Clona el repositorio:
 
     ```bash
     git clone https://github.com/tuusuario/ajedrez.git
     cd ajedrez
     ```
 
-2. Instala dependencias:
+2.Instala dependencias:
 
     ```bash
     npm install
     ```
 
-3. Configura tu archivo `.env`:
+3.Configura tu archivo `.env`:
 
     ```
     MONGO_URI=mongodb://localhost:27017/ajedrez
     PORT=3000
     ```
 
-4. Para desarrollo puedes correr:
+4.Para desarrollo puedes correr:
 
     ```bash
     node server.js
@@ -48,7 +48,7 @@ y gestionar movimientos sobre un tablero interactivo.
 
 ---
 
-## 🚀 Producción con PM2
+#Producción con PM2
 
 Para producción se recomienda correr el servidor con PM2:
 
@@ -78,7 +78,7 @@ Para producción se recomienda correr el servidor con PM2:
 
 ---
 
-## 💻 Scripts en package.json
+#Scripts en package.json
 
 ```json
 "scripts": {
@@ -88,7 +88,7 @@ Para producción se recomienda correr el servidor con PM2:
   "pm2-delete": "pm2 delete ajedrez"
 }
 
-## ESTRUCTURA DE LA PAGINA
+#ESTRUCTURA DE LA PAGINA
 
 AJEDREZ/
 │
