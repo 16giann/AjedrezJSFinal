@@ -1,4 +1,4 @@
-// 🎯 Diccionario de EMOJIS para cada tipo de pieza y color
+//Diccionario de EMOJIS para cada tipo de pieza y color
 const iconoPieza = {
   torre: { blanco: '♖', negro: '♜' },
   caballo: { blanco: '♘', negro: '♞' },
@@ -8,26 +8,26 @@ const iconoPieza = {
   peon: { blanco: '♙', negro: '♟' }
 };
 
-// Variables globales de estado de juego
+//Variables globales de estado de juego
 let turno = 'blanco';             // Color que tiene el turno actual
 let piezaArrastrada = null;       // Pieza que el usuario está arrastrando (drag & drop)
 let tableroActual = window.tableroInicial; // Tablero actual cargado desde el backend
 let saltarProximoPolling = false; // Flag para evitar actualización doble tras mover pieza
 
-// Contenedor HTML donde se dibuja el tablero
+//Contenedor HTML donde se dibuja el tablero
 const contenedor = document.getElementById("tablero");
 
-/**
+/*
  * Redibuja completamente el tablero y la interfaz
  * tras recibir datos nuevos desde el servidor.
- * ✅ 2.1.8 - Jugar / Actualizar tablero en tiempo real
+ * 2.1.8 - Jugar / Actualizar tablero en tiempo real
  */
 function actualizarVista(tablero, nuevoTurno, historial = [], capturadasBlancas = [], capturadasNegras = []) {
-  contenedor.innerHTML = "";        // Limpia el tablero anterior
+  contenedor.innerHTML = "";        //Limpia el tablero anterior
 
-  tableroActual = tablero;          // Guarda nuevo tablero en memoria
+  tableroActual = tablero;          //Guarda nuevo tablero en memoria
 
-  // Recorre cada casilla para crearla dinámicamente
+  //Recorre cada casilla para crearla dinámicamente
   for (let y = 0; y < 8; y++) {
     for (let x = 0; x < 8; x++) {
       const colorCasilla = (x + y) % 2 === 0 ? 'blanca' : 'negra';
@@ -52,22 +52,22 @@ function actualizarVista(tablero, nuevoTurno, historial = [], capturadasBlancas 
     }
   }
 
-  turno = nuevoTurno; // Actualiza variable global del turno
+  turno = nuevoTurno; //Actualiza variable global del turno
 
   console.log("Turno actual en frontend:", turno);
 
-  // Muestra quién tiene el turno en texto
+  //Muestra quién tiene el turno en texto
   const turnoElem = document.getElementById("turno-jugador");
   if (turnoElem) {
     turnoElem.textContent = `Turno del equipo ${turno}`;
   }
 
-  // Redibuja historial de movimientos en lista (SOLO últimos 3)
+  //Redibuja historial de movimientos en lista (SOLO últimos 3)
   const lista = document.getElementById("lista-de-movimientos");
   if (lista) {
     lista.innerHTML = "";
 
-    // ✅ Tomar solo los últimos 3 movimientos
+    //Tomar solo los últimos 3 movimientos
     const ultimos = historial.slice(-3);
 
     ultimos.forEach(mov => {
@@ -77,7 +77,7 @@ function actualizarVista(tablero, nuevoTurno, historial = [], capturadasBlancas 
     });
   }
 
-  // Muestra piezas capturadas
+  //Muestra piezas capturadas
   const captBlancas = document.querySelector("#capturadas-blancas .contenedor-piezas");
   const captNegras = document.querySelector("#capturadas-negras .contenedor-piezas");
   if (captBlancas && captNegras) {
@@ -99,12 +99,12 @@ function actualizarVista(tablero, nuevoTurno, historial = [], capturadasBlancas 
     });
   }
 
-  activarEventosDragAndDrop(); // Vuelve a enganchar listeners de drag & drop
+  activarEventosDragAndDrop(); //Vuelve a enganchar listeners de drag & drop
 }
 
 /**
- * Activa drag and drop sobre las casillas del tablero
- * ✅ 2.1.8 - Jugar
+ *Activa drag and drop sobre las casillas del tablero
+ *2.1.8 - Jugar
  */
 function activarEventosDragAndDrop() {
   document.querySelectorAll(".casilla").forEach(casilla => {
@@ -151,7 +151,7 @@ document.addEventListener("dragstart", (e) => {
 
 /**
  * Envía un movimiento al servidor (API) y actualiza el tablero
- * ✅ 2.1.8 - Jugar
+ * 2.1.8 - Jugar
  */
 async function moverPiezaBackend(origenX, origenY, destinoX, destinoY) {
   const movimiento = {
@@ -173,7 +173,7 @@ async function moverPiezaBackend(origenX, origenY, destinoX, destinoY) {
     const data = await response.json();
 
     if (data.success) {
-      // Si el movimiento fue exitoso, actualizamos la vista
+      //Si el movimiento fue exitoso, actualizamos la vista
       actualizarVista(
         data.tablero,
         data.turno,
@@ -192,8 +192,8 @@ async function moverPiezaBackend(origenX, origenY, destinoX, destinoY) {
 }
 
 /**
- * Devuelve lista de movimientos válidos locales para cada pieza
- * (solo usado para ver si se permite arrastrar una pieza)
+ *Devuelve lista de movimientos válidos locales para cada pieza
+ *(solo usado para ver si se permite arrastrar una pieza)
  */
 function obtenerMovimientosValidos(tipo, x, y, color, tablero) {
   switch (tipo) {
@@ -207,9 +207,7 @@ function obtenerMovimientosValidos(tipo, x, y, color, tablero) {
   }
 }
 
-// ===========================
-// Lógica de movimientos locales (reglas de ajedrez)
-// ===========================
+//Lógica de movimientos locales (reglas de ajedrez)
 
 function movimientosCaballo(x, y) {
   const movs = [[2,1],[1,2],[-1,2],[-2,1],[-2,-1],[-1,-2],[1,-2],[2,-1]];
@@ -287,7 +285,7 @@ function movimientosPeon(x, y, color, tablero) {
 
 /**
  * Código que se ejecuta una sola vez al cargar la página
- * ✅ 2.1.8 - Acceder a partidas
+ * 2.1.8 - Acceder a partidas
  */
 document.addEventListener("DOMContentLoaded", () => {
   if (window.codigoPartida) {
@@ -326,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /**
  * Polling cada 5 segundos para actualizar el tablero automáticamente
- * ✅ 2.1.9 - Actualizar estado periódicamente
+ * 2.1.9 - Actualizar estado periódicamente
  */
 setInterval(() => {
   if (saltarProximoPolling) {
