@@ -237,7 +237,7 @@ button:hover {
   background-color: #b58863;
 }
 
-/* 🎯 NUEVO → estilo para piezas (emojis) */
+/* estilo para piezas (emojis) */
 .pieza {
   font-size: 40px;
   cursor: grab;
@@ -326,7 +326,7 @@ button:hover {
   justify-content: center;
 }
 
-/* 🎯 NUEVO → emojis en capturas */
+/* emojis en capturas */
 .contenedor-piezas span {
   font-size: 28px;
   cursor: default;
